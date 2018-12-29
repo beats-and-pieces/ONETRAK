@@ -55,7 +55,6 @@ class Persistence {
             let fileManager = FileManager.default
             if fileManager.fileExists(atPath: filePath) {
                 print("FILE AVAILABLE")
-        //        self.deleteFile(atPath: filePath)
                 return true
             } else {
                 print("FILE NOT AVAILABLE")
@@ -64,16 +63,6 @@ class Persistence {
         } else {
             print("FILE PATH NOT AVAILABLE")
             return false
-        }
-    }
-    
-    private static func deleteFile(atPath filePath: String) {
-        do {
-            let fileManager = FileManager.default
-            try fileManager.removeItem(atPath: filePath)
-        }
-        catch let error as NSError {
-            print("Ooops! Something went wrong: \(error)")
         }
     }
 }

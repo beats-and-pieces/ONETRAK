@@ -37,37 +37,4 @@ class DayTableViewCell: UITableViewCell {
             self.layoutSubviews()
         }
     }
-    
-    
-    //    override func layoutSubviews() {
-    //        super.layoutSubviews()
-    //        //set the values for top,left,bottom,right margins
-    //        let margins = UIEdgeInsetsMake(10, 0, 0, 0)
-    //        contentView.frame = UIEdgeInsetsInsetRect(contentView.frame, margins)
-    //    }
-    
-    func setSizeForBorders(_ border: UIView) {
-        var newFrame = border.frame
-        
-//        CGRect newFrame = self.myview.frame;
-        
-//        newFrame.size.width = 200;
-        newFrame.size.height = 1;
-        border.frame = newFrame
-//        [self.myview setFrame:newFrame];
-    }
-    
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-//        self.layer.borderWidth = 1
-//        let color = UIColor(rgb: 0xFFFFFF, a: 1).cgColor
-//        self.layer.borderColor = color
-        self.layer.borderColor = UIColor(red: 0, green: 0, blue: 0, a: 0.1).cgColor
-     //   self.layer.cornerRadius = 10
-        // Initialization code
-//        self.upperBorder.bounds.height = 1
-//        setSizeForBorders(self.upperBorder)
-        
-    }
 }

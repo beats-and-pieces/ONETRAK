@@ -81,8 +81,7 @@
 			children = (
 				3A3042CD21D505CF00F044DC /* Supporting Files */,
 				3A83606621D6320A00F85627 /* View */,
-				3AA9824421D602A200F5581D /* GoalViewController.swift */,
-				3A3042C921D500D900F044DC /* DaysViewController.swift */,
+				3A41701021D7BF2C00BA54D7 /* Controller */,
 				3A1188D021D5173A00B7A52D /* Model */,
 				3A3042BA21D4E23200F044DC /* Assets.xcassets */,
 				3A3042BF21D4E23200F044DC /* Info.plist */,
@@ -97,6 +96,15 @@
 				3A3042BC21D4E23200F044DC /* LaunchScreen.storyboard */,
 			);
 			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		3A41701021D7BF2C00BA54D7 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				3AA9824421D602A200F5581D /* GoalViewController.swift */,
+				3A3042C921D500D900F044DC /* DaysViewController.swift */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 		3A83606621D6320A00F85627 /* View */ = {
