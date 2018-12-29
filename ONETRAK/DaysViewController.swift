@@ -1,0 +1,176 @@
+//
+//  DaysViewController.swift
+//  ONETRAK
+//
+//  Created by Anton Kuznetsov on 27/12/2018.
+//  Copyright © 2018 Anton Kuznetsov. All rights reserved.
+//
+import UIKit
+//import CAAnimation
+class DaysViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    
+    var days = [Day]() {
+        didSet {
+            
+            DispatchQueue.main.async {
+                if self.days.count > 0 {
+                    // print("Is this main thread? \(Thread.isMainThread)")
+                    self.tableView.reloadData()
+                    self.introAnimation()
+                    //                    self.animateBars = false
+//                    self.tableView.backgroundView?.isHidden = true
+                } else {
+                    self.tableView.isHidden = true
+                    self.tableView.backgroundView?.isHidden = false
+                }
+            }
+        }
+    }
+    var goal = Goal(steps: 4000) {
+        didSet {
+            updateUI()
+        }
+    }
+    var animateBarsAndStars = true
+    
+    @IBOutlet weak var tableView: UITableView!
+    
+    //    @IBAction func setGoal(_ sender: UIBarButtonItem) {
+    //
+    //    }
+    
+    func updateUI() {
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
+    }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return days.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if let cell  = tableView.dequeueReusableCell(withIdentifier: "DayCell") as? DayTableViewCell {
+            if !days.isEmpty {
+                
+                //       cell.goalAchievedBar.isHidden = true
+                let day = days[indexPath.row]
+                cell.dateLabel.text = day.date.formattedDateFromUnixTime()
+                cell.totalStepsLabel.text = "\(day.total) / \(goal.steps) steps"
+                cell.walkStepsLabel.text = "\(day.walk)"
+                cell.aerobicStepsLabel.text = "\(day.aerobic)"
+                cell.runStepsLabel.text = "\(day.run)"
+                cell.progressBarView.shapeLayer?.removeAllAnimations()
+                //                cell.progressBarView.layer.sublayers?.forEach { $0.removeFromSuperlayer() }
+                
+                cell.progressBarView.drawBarsFor(walk: day.proportionWalk, aerobic: day.proportionAerobic, run: day.proportionRun, animated: animateBarsAndStars)
+                if day.total >= goal.steps {
+                    
+                    cell.goalAchievedBar.isHidden = false
+                    cell.goalAchievedBar.alpha = 1
+                    cell.achievementStar.alpha = 0
+                    UIView.animate(withDuration: 1.5, delay: 0.2, options: [], animations: {
+                        cell.achievementStar.alpha = 1 // Here you will get the animation you want
+                        //                        cell.goalAchievedBar.alpha = 1
+                    }, completion: nil)
+                } else {
+                    cell.goalAchievedBar.isHidden = true
+                }
+                // cell.layoutSubviews()
+            }
+            
+//            animateBarsAndStars = false
+            
+            return cell
+        } else {
+            return UITableViewCell()
+        }
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        if days.count > 0 {
+            return 1
+        } else {
+            let messageLabel = UILabel(frame: CGRect(x: 0, y: 0, width: self.view.bounds.size.width, height: self.view.bounds.size.height))
+            
+            messageLabel.text = "Loading..."
+            messageLabel.textColor = UIColor.black
+            messageLabel.numberOfLines = 0
+            messageLabel.textAlignment = .center
+            messageLabel.sizeToFit()
+            
+            self.tableView.backgroundView = messageLabel
+            self.tableView.separatorStyle = UITableViewCellSeparatorStyle.none
+            
+            return 0
+        }
+    }
+    
+    
+    
+    func getAllData() {
+        StatsData.getFromServer { (days, error) in
+            if let error = error {
+                // got an error in getting the data
+                print(error)
+                return
+            }
+            guard let days = days else {
+                print("error getting days: result is nil")
+                return
+            }
+            self.days = days
+            // success :)
+            debugPrint(days)
+            
+            if let goal = StatsData.getGoalFromDisk() {
+                self.goal = goal
+            }
+            print("self.goal \(self.goal.steps)")
+            DispatchQueue.main.async {
+                // print("Is this main thread? \(Thread.isMainThread)")
+                //    self.tableView.reloadData()
+            }
+            
+        }
+    }
+    
+    func introAnimation() {
+        self.tableView.alpha = 0
+        UIView.animate(withDuration: 0.5, delay: 0, options: [], animations: {
+            self.tableView.alpha = 1 // Here you will get the animation you want
+            //                        cell.goalAchievedBar.alpha = 1
+        }, completion: nil)
+        self.tableView.backgroundView?.isHidden = true
+        //animateBarsAndStars = false
+    }
+    
+    override func viewDidLoad() {
+        tableView.separatorStyle = UITableViewCellSeparatorStyle.none
+        super.viewDidLoad()
+        getAllData()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        print("View appeared!")
+        self.goal = StatsData.goal
+        //        if self.goal.steps != StatsData.goal.steps {
+        //            tableView.reloadData()
+        //        }
+        super.viewDidAppear(animated)
+    }
+}
+
+extension UIStackView {
+    
+    func addBackground(color: UIColor) {
+        let subview = UIView(frame: bounds)
+        subview.backgroundColor = color
+        subview.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        insertSubview(subview, at: 0)
+    }
+    
+}
+
+//extension Day {
+//    var wasAnimated = false
+//}
