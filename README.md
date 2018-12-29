@@ -1,20 +1,14 @@
-Script Name as Headline
+ONETRAK Test 
 ======
-**ONETRAK** is a test app for a ONETRAK company for things. The usage is explained like this:
+**ONETRAK** is a test app for a ONETRAK company.
 
-```
-$ ./script parameter1 .. parameterN
- Output
-$ 
-```
+
 ## Version 
-* Version X.Y
+* Version 1.0
 
 ## Contact
 #### Developer/Company
 * Homepage: 
-* e-mail: 
-* Twitter: [@twitterhandle](https://twitter.com/twitterhandle "twitterhandle on twitter")
-* other communication/social media
+* e-mail: greedy.mf@gmail.co,
 
 [![Flattr this git repo](http://api.flattr.com/button/flattr-badge-large.png)](https://flattr.com/submit/auto?user_id=username&url=https://github.com/username/sw-name&title=sw-name&language=&tags=github&category=software) 
