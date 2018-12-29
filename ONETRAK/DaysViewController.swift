@@ -78,6 +78,7 @@ class DaysViewController: UIViewController, UITableViewDelegate, UITableViewData
                     }
                 } else {
                     cell.goalAchievedBar.isHidden = true
+                    
                 }
                 cell.layoutSubviews()
             }
