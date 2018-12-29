@@ -13,7 +13,6 @@ class Goal: Codable {
     init(steps: Int) {
         self.steps = steps
     }
-    
 }
 
 extension Goal: Equatable {
