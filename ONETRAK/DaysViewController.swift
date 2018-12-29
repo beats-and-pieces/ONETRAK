@@ -18,7 +18,7 @@ class DaysViewController: UIViewController, UITableViewDelegate, UITableViewData
                     self.tableView.reloadData()
                     self.introAnimation()
                     //                    self.animateBars = false
-//                    self.tableView.backgroundView?.isHidden = true
+                    //                    self.tableView.backgroundView?.isHidden = true
                 } else {
                     self.tableView.isHidden = true
                     self.tableView.backgroundView?.isHidden = false
@@ -31,7 +31,8 @@ class DaysViewController: UIViewController, UITableViewDelegate, UITableViewData
             updateUI()
         }
     }
-    var animateBarsAndStars = true
+    var animateProgressBars = true
+    var animateAchievementStars = true
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -62,23 +63,26 @@ class DaysViewController: UIViewController, UITableViewDelegate, UITableViewData
                 cell.progressBarView.shapeLayer?.removeAllAnimations()
                 //                cell.progressBarView.layer.sublayers?.forEach { $0.removeFromSuperlayer() }
                 
-                cell.progressBarView.drawBarsFor(walk: day.proportionWalk, aerobic: day.proportionAerobic, run: day.proportionRun, animated: animateBarsAndStars)
+                cell.progressBarView.drawBarsFor(walk: day.proportionWalk, aerobic: day.proportionAerobic, run: day.proportionRun, animated: animateProgressBars)
                 if day.total >= goal.steps {
                     
-                    cell.goalAchievedBar.isHidden = false
-                    cell.goalAchievedBar.alpha = 1
-                    cell.achievementStar.alpha = 0
-                    UIView.animate(withDuration: 1.5, delay: 0.2, options: [], animations: {
-                        cell.achievementStar.alpha = 1 // Here you will get the animation you want
-                        //                        cell.goalAchievedBar.alpha = 1
-                    }, completion: nil)
+                    
+                    if animateAchievementStars {
+                        cell.goalAchievedBar.isHidden = false
+                        cell.goalAchievedBar.alpha = 1
+                        cell.achievementStar.alpha = 0
+                        UIView.animate(withDuration: 1.5, delay: 0.2, options: [], animations: {
+                            cell.achievementStar.alpha = 1 // Here you will get the animation you want
+                            //                        cell.goalAchievedBar.alpha = 1
+                        }, completion: nil)
+                    }
                 } else {
                     cell.goalAchievedBar.isHidden = true
                 }
-                // cell.layoutSubviews()
+                cell.layoutSubviews()
             }
             
-//            animateBarsAndStars = false
+            //            animateBarsAndStars = false
             
             return cell
         } else {
@@ -152,25 +156,23 @@ class DaysViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     override func viewDidAppear(_ animated: Bool) {
         print("View appeared!")
+        animateAchievementStars = true
         self.goal = StatsData.goal
         //        if self.goal.steps != StatsData.goal.steps {
         //            tableView.reloadData()
         //        }
         super.viewDidAppear(animated)
     }
-}
-
-extension UIStackView {
     
-    func addBackground(color: UIColor) {
-        let subview = UIView(frame: bounds)
-        subview.backgroundColor = color
-        subview.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        insertSubview(subview, at: 0)
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if animateProgressBars == true {
+            animateProgressBars = false
+        }
+        if animateAchievementStars == true {
+            animateAchievementStars = false
+            
+        }
     }
-    
 }
 
-//extension Day {
-//    var wasAnimated = false
-//}
+
