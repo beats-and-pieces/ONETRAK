@@ -82,9 +82,6 @@ class DaysViewController: UIViewController, UITableViewDelegate, UITableViewData
                 }
                 cell.layoutSubviews()
             }
-            
-            //            animateBarsAndStars = false
-            
             return cell
         } else {
             return UITableViewCell()
@@ -159,9 +156,6 @@ class DaysViewController: UIViewController, UITableViewDelegate, UITableViewData
         print("View appeared!")
         animateAchievementStars = true
         self.goal = StatsData.goal
-        //        if self.goal.steps != StatsData.goal.steps {
-        //            tableView.reloadData()
-        //        }
         super.viewDidAppear(animated)
     }
     
@@ -171,7 +165,6 @@ class DaysViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
         if animateAchievementStars == true {
             animateAchievementStars = false
-            
         }
     }
 }

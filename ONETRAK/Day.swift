@@ -20,15 +20,7 @@ extension Day {
 }
 
 extension Day {
-
     var proportionRun: Float {return Float(self.run) / Float(self.total) }
     var proportionWalk: Float {return Float(self.walk) / Float(self.total) }
     var proportionAerobic: Float {return Float(self.aerobic) / Float(self.total) }
-    
 }
-
-//class Proportions {
-//    var aerobic: Int
-//    var run: Int
-//    var walk: Int
-//}

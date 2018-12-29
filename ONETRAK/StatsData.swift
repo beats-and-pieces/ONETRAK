@@ -13,7 +13,6 @@ class StatsData {
     
     static var goal = Goal(steps: 4000) {
         didSet {
-            print("Goal is set! to \(self.goal.steps)")
             Persistence.saveGoalDataToDisk(self.goal)
         }
     }
