@@ -8,8 +8,6 @@
 
 import Foundation
 
-
-
 class StatsData {
     private static let urlForDataOnServer = "https://intern-f6251.firebaseio.com/intern/metric.json"
     
@@ -72,11 +70,4 @@ class StatsData {
     }
 }
 
-extension Int {
-    func formattedDateFromUnixTime() -> String {
-        let date = Date(timeIntervalSince1970: Double(self / 1000))
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "d.MM.yyyy"
-        return dateFormatter.string(from: date)
-    }
-}
+

@@ -52,7 +52,7 @@ class DayTableViewCell: UITableViewCell {
         self.layer.borderWidth = 1
 //        let color = UIColor(rgb: 0xFFFFFF, a: 1).cgColor
 //        self.layer.borderColor = color
-        self.layer.borderColor = UIColor(red: 0, green: 0, blue: 0, a: 0.3).cgColor
+        self.layer.borderColor = UIColor(red: 0, green: 0, blue: 0, a: 0.1).cgColor
      //   self.layer.cornerRadius = 10
         // Initialization code
     }

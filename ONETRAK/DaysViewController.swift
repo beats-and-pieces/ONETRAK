@@ -175,4 +175,13 @@ class DaysViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
 }
 
+extension Int {
+    func formattedDateFromUnixTime() -> String {
+        let date = Date(timeIntervalSince1970: Double(self / 1000))
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "d.MM.yyyy"
+        return dateFormatter.string(from: date)
+    }
+}
+
 
