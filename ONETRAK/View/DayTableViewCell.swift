@@ -22,21 +22,22 @@ class DayTableViewCell: UITableViewCell {
     
     @IBOutlet weak var goalAchievedBar: UIStackView!
     @IBOutlet weak var achievementStar: UIImageView!
-    
+
+    //    убрать
     @IBOutlet weak var upperBorder: UIView!
     
-    override var frame: CGRect {
-        get {
-            return super.frame
-        }
-        set (newFrame) {
-            var frame =  newFrame
-            frame.origin.y += 4
-            frame.size.height -= 2 * 5
-            super.frame = frame
-            self.layoutSubviews()
-        }
-    }
+//    override var frame: CGRect {
+//        get {
+//            return super.frame
+//        }
+//        set (newFrame) {
+//            var frame =  newFrame
+//            frame.origin.y += 4
+//            frame.size.height -= 2 * 5
+//            super.frame = frame
+//            self.layoutSubviews()
+//        }
+//    }
     
     
     //    override func layoutSubviews() {
@@ -45,6 +46,9 @@ class DayTableViewCell: UITableViewCell {
     //        let margins = UIEdgeInsetsMake(10, 0, 0, 0)
     //        contentView.frame = UIEdgeInsetsInsetRect(contentView.frame, margins)
     //    }
+    
+    
+//    убрать
     
     func setSizeForBorders(_ border: UIView) {
         var newFrame = border.frame
