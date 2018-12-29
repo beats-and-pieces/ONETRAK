@@ -1,6 +1,6 @@
 Script Name as Headline
 ======
-**Script Name** is a script for things. The usage is explained like this:
+**ONETRAK** is a test app for a ONETRAK company for things. The usage is explained like this:
 
 ```
 $ ./script parameter1 .. parameterN
